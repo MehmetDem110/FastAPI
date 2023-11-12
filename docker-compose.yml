@@ -1,7 +1,7 @@
 version: "3.9"
 services:
  useritem-api-service:
-  image: MehmetDem110/FastAPI
+  image: miverboven/python-db-test
   ports:
     - "8000:8000"
   volumes:
