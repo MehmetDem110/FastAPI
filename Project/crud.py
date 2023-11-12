@@ -4,44 +4,60 @@ import models
 import schemas
 
 
-def get_user(db: Session, user_id: int):
-    return db.query(models.User).filter(models.User.id == user_id).first()
+def get_snack(db: Session, snack_id: int):
+    return db.query(models.Snack).filter(models.Snack.id == snack_id).first()
 
 
-def get_user_by_email(db: Session, email: str):
-    return db.query(models.User).filter(models.User.email == email).first()
+def get_snack_by_name(db: Session, name: str):
+    return db.query(models.Snack).filter(models.Snack.name == name).first()
 
 
-def get_users(db: Session, skip: int = 0, limit: int = 100):
-    return db.query(models.User).offset(skip).limit(limit).all()
+def get_snacks(db: Session, skip: int = 0, limit: int = 100):
+    return db.query(models.Snack).offset(skip).limit(limit).all()
 
 
-def create_user(db: Session, user: schemas.UserCreate):
-    fake_hashed_password = user.password + "notreallyhashed"
-    db_user = models.User(email=user.email, hashed_password=fake_hashed_password)
-    db.add(db_user)
+def create_snack(db: Session, snack: schemas.SnackCreate):
+    db_snack = models.Snack(name=snack.name, description=snack.description)
+    db.add(db_snack)
     db.commit()
-    db.refresh(db_user)
-    return db_user
+    db.refresh(db_snack)
+    return db_snack
 
 
-def get_items(db: Session, skip: int = 0, limit: int = 100):
-    return db.query(models.Item).offset(skip).limit(limit).all()
+def get_sodas(db: Session, skip: int = 0, limit: int = 100):
+    return db.query(models.Soda).offset(skip).limit(limit).all()
 
 
-def create_user_item(db: Session, item: schemas.ItemCreate, user_id: int):
-    db_item = models.Item(**item.dict(), owner_id=user_id)
-    db.add(db_item)
+def get_soda(db: Session, soda_id: int):
+    return db.query(models.Soda).filter(models.Soda.id == soda_id).first()
+
+
+def get_soda_by_name(db: Session, name: str):
+    return db.query(models.Soda).filter(models.Soda.name == name).first()
+
+def create_soda(db: Session, soda: schemas.SodaCreate):
+    db_soda = models.Soda(name=soda.name, flavor=soda.flavor)
+    db.add(db_soda)
     db.commit()
-    db.refresh(db_item)
-    return db_item
+    db.refresh(db_soda)
+    return db_soda
 
 
-def delete_user(db: Session, user_id: int):
-    user = db.query(models.User).filter(models.User.id == user_id).first()
-    if user:
-        db.delete(user)
+def delete_snack(db: Session, snack_id: int):
+    snack = db.query(models.Snack).filter(models.Snack.id == snack_id).first()
+    if snack:
+        db.delete(snack)
         db.commit()
-        db.refresh(user)
-        return user
+        db.refresh(snack)
+        return snack
+    return None
+
+
+def delete_soda(db: Session, soda_id: int):
+    soda = db.query(models.Soda).filter(models.Soda.id == soda_id).first()
+    if soda:
+        db.delete(soda)
+        db.commit()
+        db.refresh(soda)
+        return soda
     return None
