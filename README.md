@@ -46,9 +46,7 @@ Dit is mijn API project over snacks en soda. Ik sla al de gegevens ook op in mij
 - Get-request: all soda ![allsodas](img/api_get_sodas.png)
 - Get-request: id snack ![idsnack](img/api_get_snacks_id.png)
 - Get-request: id soda ![idsoda](img/api_get_sodas_id.png)
-- Delete-request: remove snack id ![removesnackid](img/api_delete_snack_id.png)
-- Delete-request: remove soda id ![removesodaid](img/api_delete_soda_id.png)
-
-### Back to top
+- Delete-request: remove snack id (it shows error but it gets removed from the database) ![removesnackid](img/api_delete_snack_id.png)
+- Delete-request: remove soda id (it shows error but it gets removed from the database) ![removesodaid](img/api_delete_soda_id.png)
 
 ---
